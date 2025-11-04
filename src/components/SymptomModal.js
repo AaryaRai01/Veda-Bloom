@@ -8,6 +8,7 @@ export default function SymptomModal({ isOpen, onRequestClose, onSave, date }) {
   const [selectedSymptoms, setSelectedSymptoms] = useState([]);
   const [selectedMood, setSelectedMood] = useState('');
 
+  // Clear state when the modal opens for a new date
   useEffect(() => {
     if (isOpen) {
       setSelectedSymptoms([]);
@@ -25,7 +26,7 @@ export default function SymptomModal({ isOpen, onRequestClose, onSave, date }) {
 
   const handleSave = () => {
     onSave({ symptoms: selectedSymptoms, mood: selectedMood });
-    onRequestClose();
+    // Dashboard will close the modal
   };
 
   return (
@@ -83,4 +84,3 @@ export default function SymptomModal({ isOpen, onRequestClose, onSave, date }) {
     </Modal>
   );
 }
-
