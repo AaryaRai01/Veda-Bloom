@@ -1,0 +1,222 @@
+{
+  "adolescents": [
+    {
+      "question": "What are the first signs of puberty in girls?",
+      "answer": "Common first signs include breast development and the growth of pubic hair. This is all part of your body's natural process of maturing."
+    },
+    {
+      "question": "When does menstruation usually start, and what’s normal?",
+      "answer": "Most girls start their period between ages 12 and 15, but it can be earlier or later. A 'normal' cycle can last anywhere from 21 to 35 days."
+    },
+    {
+      "question": "How long does a period last and what color is healthy?",
+      "answer": "A period typically lasts 3 to 7 days. The blood color can range from bright red to dark brown or black, all of which are normal."
+    },
+    {
+      "question": "Is it normal to have irregular periods at first?",
+      "answer": "Yes, it is very normal for periods to be irregular for the first few years. It can take your body time to settle into a regular hormone cycle."
+    },
+    {
+      "question": "How can I manage period pain and cramps?",
+      "answer": "A heating pad, light exercise, and over-the-counter pain relievers like ibuprofen can provide a lot of relief. If pain is severe, see a doctor."
+    },
+    {
+      "question": "What kind of menstrual hygiene products should I use?",
+      "answer": "You can use pads, tampons, or menstrual cups. It's about finding what's most comfortable for you. Be sure to change them regularly."
+    },
+    {
+      "question": "Can I play sports or swim during my period?",
+      "answer": "Absolutely! Exercise can even help relieve cramps. If you're swimming, just be sure to use a tampon or menstrual cup."
+    },
+    {
+      "question": "What does vaginal discharge mean?",
+      "answer": "Vaginal discharge is a normal, healthy fluid that helps clean and protect the vagina. It can change in color and thickness throughout your cycle."
+    },
+    {
+      "question": "How can I talk to my parents about puberty or periods?",
+      "answer": "It can feel awkward, but try starting with 'I have some questions about my body changing.' Remember, they went through it too and are there to help."
+    },
+    {
+      "question": "What is consent, and why is it important in relationships?",
+      "answer": "Consent means freely and enthusiastically agreeing to any kind of activity. It is essential for any healthy relationship and can be taken back at any time."
+    }
+  ],
+  "youngAdults": [
+    {
+      "question": "How do I choose the right method of contraception?",
+      "answer": "The right method depends on your lifestyle, health, and personal preferences. It is best to discuss options like pills, IUDs, or condoms with a healthcare provider."
+    },
+    {
+      "question": "Can birth control affect fertility later?",
+      "answer": "Most birth control methods do not affect long-term fertility. Once you stop using them, your body will return to its natural cycle."
+    },
+    {
+      "question": "How can I know if my periods are healthy or abnormal?",
+      "answer": "A 'healthy' period is what's normal for you. Signs of an 'abnormal' period include severe pain that stops you from regular activities, very heavy bleeding, or suddenly missing periods."
+    },
+    {
+      "question": "What are signs of reproductive infections (like yeast or UTIs)?",
+      "answer": "Common signs include unusual discharge, itching, a burning sensation during urination, and pelvic pain. If you experience these, it's important to see a doctor."
+    },
+    {
+      "question": "How often should I get a Pap smear or gynecological checkup?",
+      "answer": "It's generally recommended to start Pap smears at age 21 and have a gynecological checkup annually, but your doctor can give you the best schedule for your specific health needs."
+    },
+    {
+      "question": "How do I practice safe sex and prevent STIs?",
+      "answer": "Using barrier methods like condoms consistently and correctly is the most effective way to prevent the spread of sexually transmitted infections (STIs)."
+    },
+    {
+      "question": "What lifestyle factors affect fertility?",
+      "answer": "Factors like smoking, excessive alcohol use, high stress, and being significantly overweight or underweight can all impact your fertility."
+    },
+    {
+      "question": "When should I see a doctor about irregular periods or pain?",
+      "answer": "If your periods are consistently painful, very heavy, or suddenly become irregular when they were once regular, it's a good idea to get a checkup."
+    },
+    {
+      "question": "What’s the difference between emergency contraception and birth control pills?",
+      "answer": "Birth control pills are taken regularly to prevent pregnancy. Emergency contraception (like the 'morning-after pill') is taken *after* unprotected sex to prevent a pregnancy from occurring."
+    },
+    {
+      "question": "How can I maintain good vaginal hygiene without harming natural balance?",
+      "answer": "The vagina is self-cleaning. Use only mild, unscented soap and water on the external vulva. Avoid douching, as it can disrupt your natural pH balance."
+    }
+  ],
+  "adults": [
+    {
+      "question": "How can I prepare my body for pregnancy?",
+      "answer": "Start taking a prenatal vitamin with folic acid, maintain a healthy weight, eat a balanced diet, and discuss any existing health conditions with your doctor."
+    },
+    {
+      "question": "What are early signs of pregnancy?",
+      "answer": "The most common sign is a missed period. Other early signs can include tender breasts, nausea (morning sickness), and fatigue."
+    },
+    {
+      "question": "How common is infertility in the 30s, and what can I do about it?",
+      "answer": "Female fertility naturally begins to decline in the 30s. If you are under 35 and have been trying for one year, or over 35 and have been trying for 6 months, it's time to see a fertility specialist."
+    },
+    {
+      "question": "What are signs of PCOS or endometriosis?",
+      "answer": "Signs of PCOS can include irregular periods, acne, and excess hair growth. Endometriosis is often characterized by very painful periods and pelvic pain."
+    },
+    {
+      "question": "Can stress or weight affect reproductive health?",
+      "answer": "Yes, significantly. High stress can disrupt ovulation, and being over or underweight can throw off hormone balances, both of which affect your cycle and fertility."
+    },
+    {
+      "question": "What’s the best time to try for pregnancy in your cycle?",
+      "answer": "The best time is during your 'fertile window,' which is typically the five days leading up to and including the day of ovulation."
+    },
+    {
+      "question": "How do I balance career, family, and reproductive health?",
+      "answer": "This is a major challenge. Prioritize your health checkups, communicate openly with your partner, and don't hesitate to seek support from friends, family, or a mental health professional."
+    },
+    {
+      "question": "How often should I get prenatal checkups?",
+      "answer": "Typically, you'll go monthly for the first 28 weeks, every two weeks until 36 weeks, and then weekly until delivery. Your doctor will advise the best schedule for you."
+    },
+    {
+      "question": "What are safe exercises during pregnancy?",
+      "answer": "Low-impact exercises like walking, swimming, prenatal yoga, and stationary cycling are generally very safe and beneficial. Always consult your doctor first."
+    },
+    {
+      "question": "How can I manage postpartum bleeding and recovery?",
+      "answer": "Postpartum bleeding (lochia) is normal and can last for several weeks. Use heavy-duty pads, rest as much as possible, and follow your doctor's instructions for care."
+    }
+  ],
+  "mature": [
+    {
+      "question": "What are signs of perimenopause?",
+      "answer": "Perimenopause is the transition to menopause. Common signs include irregular periods (longer, shorter, heavier, or lighter), hot flashes, night sweats, sleep problems, and mood swings."
+    },
+    {
+      "question": "How can I manage hot flashes, mood swings, and sleep issues?",
+      "answer": "Lifestyle changes like dressing in layers, avoiding triggers (like spicy food or alcohol), practicing stress-reduction (like yoga), and improving sleep habits can help. Your doctor may also discuss medical options."
+    },
+    {
+      "question": "Can I still get pregnant during perimenopause?",
+      "answer": "Yes, although it's less likely, pregnancy is still possible during perimenopause as long as you are still having periods. If you don't want to get pregnant, continue using contraception."
+    },
+    {
+      "question": "What changes happen in menstrual cycles during this time?",
+      "answer": "Your cycles may become longer or shorter, you might skip periods, and your flow could be heavier or lighter. This irregularity is a hallmark of perimenopause."
+    },
+    {
+      "question": "How often should I get breast and cervical screenings?",
+      "answer": "It is generally recommended to get a mammogram every 1-2 years. You can often stop Pap smears around age 65 if your recent results have been normal. Always follow your doctor's specific advice."
+    },
+    {
+      "question": "What are healthy lifestyle choices during midlife?",
+      "answer": "Focus on a balanced diet rich in calcium, regular weight-bearing exercise (like walking or lifting weights) to support bone health, and managing stress."
+    },
+    {
+      "question": "How do hormonal changes affect sexual desire or comfort?",
+      "answer": "Falling estrogen levels can lead to a lower libido and vaginal dryness, which can make sex uncomfortable. Water-based lubricants and talking to your doctor are great first steps."
+    },
+    {
+      "question": "What can help with vaginal dryness or pain during sex?",
+      "answer": "Over-the-counter vaginal moisturizers and lubricants are very effective. Your doctor can also prescribe low-dose vaginal estrogen creams which are safe and work very well."
+    },
+    {
+      "question": "Are there natural remedies for menopause symptoms?",
+      "answer": "Some women find relief from black cohosh or soy, but the evidence is mixed. Lifestyle changes like exercise and stress management are the most proven 'natural' remedies."
+    },
+    {
+      "question": "Should I consider hormone replacement therapy (HRT)?",
+      "answer": "HRT is the most effective treatment for severe menopause symptoms. However, it has some risks. It is a very personal decision that you must discuss in detail with your doctor."
+    }
+  ],
+  "postMenopausal": [
+    {
+      "question": "What exactly is menopause, and when does it occur?",
+      "answer": "Menopause is officially diagnosed when you have gone 12 consecutive months without a menstrual period. The average age in the U.S. is 51, but it can happen earlier or later."
+    },
+    {
+      "question": "Is it normal to still have spotting or bleeding after menopause?",
+      "answer": "No. Any vaginal bleeding or spotting after you have been diagnosed with menopause (12 months with no period) is abnormal and should be evaluated by your doctor immediately."
+    },
+    {
+      "question": "How can I protect bone health and prevent osteoporosis?",
+      "answer": "After menopause, the risk of osteoporosis (weak bones) increases. Protect yourself with a diet high in calcium and Vitamin D, regular weight-bearing exercise, and avoiding smoking."
+    },
+    {
+      "question": "Does menopause affect sexual activity or comfort?",
+      "answer": "It can. Lower estrogen can cause vaginal dryness, which may make sex uncomfortable. Using lubricants or vaginal moisturizers, and communicating with your partner, can help immensely."
+    },
+    {
+      "question": "How can I maintain vaginal health post-menopause?",
+      "answer": "Avoid harsh soaps. Use over-the-counter vaginal moisturizers to help with dryness. Your doctor can also prescribe low-dose vaginal estrogen, which is very safe and effective."
+    },
+    {
+      "question": "Are libido changes normal after menopause?",
+      "answer": "Yes, it is very common for sexual desire (libido) to decrease due to hormonal changes, but this is not true for everyone. Other factors like stress, sleep, and relationship satisfaction also play a big role."
+    },
+    {
+      "question": "Should I continue regular gynecological checkups?",
+      "answer": "Absolutely. Regular pelvic exams and health checkups are still very important after menopause to screen for cancers and monitor your pelvic health."
+    },
+    {
+      "question": "How can I manage urinary incontinence or pelvic floor issues?",
+      "answer": "This is very common. Pelvic floor exercises (Kegels) are a great first step. If it's bothersome, a doctor or a pelvic floor physical therapist can offer many effective treatments."
+    },
+    {
+      "question": "What lifestyle habits improve overall reproductive wellness?",
+      "answer": "Maintaining a healthy weight, eating a balanced diet, staying physically active, getting good sleep, and managing stress are all key to overall health after menopause."
+    },
+    {
+      "question": "When should I consult a doctor about post-menopausal symptoms?",
+      "answer": "You should see a doctor for any new or bothersome symptoms, especially any vaginal bleeding, severe hot flashes, or pelvic pain."
+    }
+  ],
+  "general": [
+    {
+      "question": "How does stress impact the menstrual cycle?",
+      "answer": "High levels of stress can disrupt your hormone balance, which can lead to delayed or missed periods, or even make premenstrual symptoms worse. Managing stress can help regulate your cycle."
+    },
+    {
+      "question": "What is a 'normal' menstrual cycle?",
+      "answer": "A 'normal' cycle can be anywhere from 21 to 35 days long, and the period itself can last from 3 to 7 days. 'Normal' is what's consistent for you."
+    }
+  ]
+}
