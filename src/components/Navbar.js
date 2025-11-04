@@ -4,11 +4,12 @@ import { Link, useLocation } from 'react-router-dom';
 export default function Navbar() {
   const location = useLocation();
   
-  // Hide navbar only on the quiz page for a focused experience
-  if (location.pathname === '/quiz') {
+  // Hide navbar on the homepage and quiz for a full-screen experience
+  if (['/', '/quiz'].includes(location.pathname)) {
     return null;
   }
 
+  // Solid red-band navbar for all internal pages (Dashboard, FAQ, etc.)
   return (
     <nav className="bg-brand-red text-white shadow-lg fixed w-full z-10 top-0 h-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
