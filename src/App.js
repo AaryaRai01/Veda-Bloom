@@ -12,6 +12,7 @@ function App() {
   return (
     <Router>
       <Navbar />
+      {/* This main tag has no padding, allowing pages to control their own layout */}
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,4 +28,3 @@ function App() {
 }
 
 export default App;
-
