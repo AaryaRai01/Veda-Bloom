@@ -1,21 +1,20 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore"; // 1. IMPORT FIRESTORE
 
-// Read the secret keys from the .env.local file
 const firebaseConfig = {
-  REACT_APP_API_KEY="YOUR_API_KEY_HERE"
-  REACT_APP_AUTH_DOMAIN="YOUR_AUTH_DOMAIN_HERE"
-  REACT_APP_PROJECT_ID="YOUR_PROJECT_ID_HERE"
-  REACT_APP_STORAGE_BUCKET="YOUR_STORAGE_BUCKET_HERE"
-  REACT_APP_MESSAGING_SENDER_ID="YOUR_MESSAGING_SENDER_ID_HERE"
-  REACT_APP_APP_ID="YOUR_APP_ID_HERE"
-  REACT_APP_MEASUREMENT_ID="YOUR_MEASUREMENT_ID_HERE"
+  apiKey: "AIzaSyDVAe7QfXdsc0TNNYcbjyD_qRVigKJaO2A",
+  authDomain: "vedabloom-bc3c9.firebaseapp.com",
+  projectId: "vedabloom-bc3c9",
+  storageBucket: "vedabloom-bc3c9.firebasestorage.app",
+  messagingSenderId: "757997746657",
+  appId: "1:757997746657:web:50d8c41e779f88ecc9baa0",
+  measurementId: "G-N9L32D0K3W"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Export Auth and DB
+// Export Auth and DB for other files to use
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+export const db = getFirestore(app); // 2. EXPORT THE DATABASE
