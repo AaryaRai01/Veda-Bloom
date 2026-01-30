@@ -1,15 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore"; // 1. IMPORT FIRESTORE
+import { getFirestore } from "firebase/firestore";
 
+// Keys are now pulled from the .env file or Vercel Environment Variables
 const firebaseConfig = {
-  apiKey: ,
-  authDomain: ,
-  projectId: ,
-  storageBucket: ,
-  messagingSenderId: ,
-  appId: :,
-  measurementId: 
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID
 };
 
 // Initialize Firebase
@@ -17,4 +18,4 @@ const app = initializeApp(firebaseConfig);
 
 // Export Auth and DB for other files to use
 export const auth = getAuth(app);
-export const db = getFirestore(app); // 2. EXPORT THE DATABASE
+export const db = getFirestore(app);
