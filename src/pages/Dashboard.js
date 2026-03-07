@@ -8,12 +8,10 @@ import { doc, setDoc, collection, onSnapshot, getDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom';
 
 // Helper function to find the most recent log date
-// In a real app, you'd have a more complex way to find the "period start"
 const findLastPeriodDate = (logs) => {
   if (!logs || Object.keys(logs).length === 0) {
     return new Date(); // Default to today if no logs
   }
-  // Find the most recent date in the logs
   const mostRecentDate = Object.keys(logs).reduce((a, b) => {
     return new Date(a) > new Date(b) ? a : b;
   });
@@ -31,9 +29,12 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(null);
   const [loggedData, setLoggedData] = useState({});
   const [currentUser, setCurrentUser] = useState(null);
-  const [prediction, setPrediction] = useState(null); // <-- NEW state for prediction
-  const [predictionError, setPredictionError] = useState(null); // <-- NEW state for errors
+  const [prediction, setPrediction] = useState(null); 
+  const [predictionError, setPredictionError] = useState(null); 
   const navigate = useNavigate();
+
+  // Get the base URL from your .env / Vercel settings
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
 
   // 1. Get the current user
   useEffect(() => {
@@ -49,7 +50,7 @@ export default function Dashboard() {
 
   // 2. Listen for symptom logs from Firestore
   useEffect(() => {
-    if (!currentUser) return; // Don't do anything if user isn't logged in
+    if (!currentUser) return; 
 
     const logsCollectionRef = collection(db, 'users', currentUser.uid, 'symptomLogs');
     const unsubscribe = onSnapshot(logsCollectionRef, (snapshot) => {
@@ -65,13 +66,17 @@ export default function Dashboard() {
       console.error("Error listening to symptom logs: ", error);
     });
 
-    return unsubscribe; // Cleanup listener when component unmounts
-  }, [currentUser]); // Re-run if the user changes
+    return unsubscribe; 
+  }, [currentUser]); 
 
-  // 3. NEW: Function to fetch prediction from your JAVA backend
+  // 3. Updated function to fetch prediction from your LIVE backend
   const fetchPrediction = async (uid, logs) => {
     setPredictionError(null);
     try {
+      if (!API_BASE_URL) {
+        throw new Error("API URL is not configured. Check your environment variables.");
+      }
+
       // a. Get user profile to find cycle length
       const userDocRef = doc(db, 'users', uid);
       const docSnap = await getDoc(userDocRef);
@@ -83,13 +88,13 @@ export default function Dashboard() {
         throw new Error("Invalid cycle length in profile.");
       }
       
-      // b. Find the last logged date to use as the "last period date"
+      // b. Find the last logged date
       const lastPeriodDate = findLastPeriodDate(logs);
 
-      console.log(`Sending to Java: lastPeriodDate=${formatToYYYYMMDD(lastPeriodDate)}, averageCycleLength=${cycleLength}`);
+      console.log(`Sending to Render: lastPeriodDate=${formatToYYYYMMDD(lastPeriodDate)}, averageCycleLength=${cycleLength}`);
 
-      // c. Call your Java API (running on port 8080)
-      const response = await fetch('http://localhost:8080/api/predict', {
+      // c. Call your Live Java API on Render using the environment variable
+      const response = await fetch(`${API_BASE_URL}/api/predict`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -99,12 +104,12 @@ export default function Dashboard() {
       });
 
       if (!response.ok) {
-        throw new Error(`Connection to prediction server failed. Is it running?`);
+        throw new Error(`Connection to prediction server failed. Status: ${response.status}`);
       }
 
       // d. Get prediction back from Java and save it
       const predictionData = await response.json();
-      console.log('Prediction received from Java:', predictionData);
+      console.log('Prediction received from Render:', predictionData);
       setPrediction(predictionData);
 
     } catch (error) {
@@ -133,19 +138,16 @@ export default function Dashboard() {
       await setDoc(logDocRef, data, { merge: true }); 
       console.log("Symptom saved for:", dateString);
       closeModal();
-      // After saving, the onSnapshot listener will automatically
-      // get the new data and trigger a new prediction.
     } catch (error) {
       console.error("Error saving symptom: ", error);
     }
   };
 
   return (
-    // This page needs top padding to be below the fixed navbar
     <div className="bg-gray-100 min-h-screen pt-16">
       <div className="max-w-4xl mx-auto p-4 md:p-8">
         
-        {/* --- NEW PREDICTION SECTION --- */}
+        {/* --- PREDICTION SECTION --- */}
         <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
           <h2 className="text-2xl font-semibold text-brand-red mb-4">Your Predictions</h2>
           {prediction ? (
@@ -175,7 +177,7 @@ export default function Dashboard() {
                 <li key={date} className="text-gray-700">
                   <strong className="text-gray-900">{date}:</strong> 
                   {data.mood && ` Mood - ${data.mood}. `}
-                  {data.symptoms.length > 0 && `Symptoms - ${data.symptoms.join(', ')}.`}
+                  {data.symptoms && data.symptoms.length > 0 && `Symptoms - ${data.symptoms.join(', ')}.`}
                 </li>
               ))}
             </ul>
