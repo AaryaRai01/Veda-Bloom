@@ -290,6 +290,11 @@ Aarya Rai
 GitHub
 https://github.com/AaryaRai01
 
+Gaurika Malviya
+
+Github
+https://github.com/GaurikaMalviya
+
 ---
 
 # 📄 License
