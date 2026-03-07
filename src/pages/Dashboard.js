@@ -20,7 +20,11 @@ const findLastPeriodDate = (logs) => {
 
 // Helper function to format date as YYYY-MM-DD for Java
 const formatToYYYYMMDD = (date) => {
-  return date.toISOString().split('T')[0];
+  try {
+    return new Date(date).toISOString().split('T')[0];
+  } catch (e) {
+    return new Date().toISOString().split('T')[0];
+  }
 };
 
 export default function Dashboard() {
@@ -42,6 +46,7 @@ export default function Dashboard() {
       if (user) {
         setCurrentUser(user);
       } else {
+        console.log("No user detected, redirecting to login.");
         navigate('/login');
       }
     });
@@ -60,7 +65,7 @@ export default function Dashboard() {
       });
       setLoggedData(logs);
       
-      // After fetching logs, trigger prediction
+      console.log("Symptom logs updated, triggering prediction fetch...");
       fetchPrediction(currentUser.uid, logs);
     }, (error) => {
       console.error("Error listening to symptom logs: ", error);
@@ -69,51 +74,63 @@ export default function Dashboard() {
     return unsubscribe; 
   }, [currentUser]); 
 
-  // 3. Updated function to fetch prediction from your LIVE backend
+  // 3. Updated function to fetch prediction with enhanced debugging
   const fetchPrediction = async (uid, logs) => {
     setPredictionError(null);
     try {
       if (!API_BASE_URL) {
-        throw new Error("API URL is not configured. Check your environment variables.");
+        throw new Error("API URL is missing from Environment Variables.");
       }
 
       // a. Get user profile to find cycle length
       const userDocRef = doc(db, 'users', uid);
       const docSnap = await getDoc(userDocRef);
       if (!docSnap.exists()) {
-        throw new Error("User profile not found. Please complete the quiz.");
+        throw new Error("User profile (quiz data) not found in Firestore.");
       }
-      const cycleLength = parseInt(docSnap.data().cycleLength, 10);
+      
+      const userData = docSnap.data();
+      const cycleLength = parseInt(userData.cycleLength, 10);
+      
       if (isNaN(cycleLength) || cycleLength <= 0) {
-        throw new Error("Invalid cycle length in profile.");
+        throw new Error(`Invalid cycle length: ${userData.cycleLength}. Please retake the quiz.`);
       }
       
       // b. Find the last logged date
       const lastPeriodDate = findLastPeriodDate(logs);
+      const formattedDate = formatToYYYYMMDD(lastPeriodDate);
 
-      console.log(`Sending to Render: lastPeriodDate=${formatToYYYYMMDD(lastPeriodDate)}, averageCycleLength=${cycleLength}`);
+      const requestBody = {
+        lastPeriodDate: formattedDate,
+        averageCycleLength: cycleLength
+      };
 
-      // c. Call your Live Java API on Render using the environment variable
+      console.log("Attempting API call to:", `${API_BASE_URL}/api/predict`);
+      console.log("Payload:", requestBody);
+
+      // c. Call your Live Java API on Render
       const response = await fetch(`${API_BASE_URL}/api/predict`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          lastPeriodDate: formatToYYYYMMDD(lastPeriodDate),
-          averageCycleLength: cycleLength
-        })
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
       });
 
       if (!response.ok) {
-        throw new Error(`Connection to prediction server failed. Status: ${response.status}`);
+        const errorText = await response.text();
+        console.error("Server responded with error:", errorText);
+        throw new Error(`Backend Error (${response.status}): ${errorText || 'Internal Server Error'}`);
       }
 
       // d. Get prediction back from Java and save it
       const predictionData = await response.json();
-      console.log('Prediction received from Render:', predictionData);
+      console.log('Successfully received prediction:', predictionData);
       setPrediction(predictionData);
 
     } catch (error) {
-      console.error('Prediction Error:', error.message);
+      console.error('Fetch Prediction Catch Block:', error);
       setPredictionError(error.message);
     }
   };
@@ -136,10 +153,10 @@ export default function Dashboard() {
     try {
       const logDocRef = doc(db, 'users', currentUser.uid, 'symptomLogs', dateString);
       await setDoc(logDocRef, data, { merge: true }); 
-      console.log("Symptom saved for:", dateString);
+      console.log("Symptom saved successfully for:", dateString);
       closeModal();
     } catch (error) {
-      console.error("Error saving symptom: ", error);
+      console.error("Error saving symptom to Firestore: ", error);
     }
   };
 
@@ -148,36 +165,61 @@ export default function Dashboard() {
       <div className="max-w-4xl mx-auto p-4 md:p-8">
         
         {/* --- PREDICTION SECTION --- */}
-        <div className="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <div className="bg-white p-6 rounded-lg shadow-lg mb-8 border-l-4 border-brand-red">
           <h2 className="text-2xl font-semibold text-brand-red mb-4">Your Predictions</h2>
           {prediction ? (
-            <div className="space-y-2">
-              <p className="text-lg"><strong>Next Predicted Period:</strong> {prediction.nextPeriodDate}</p>
-              <p className="text-gray-600"><strong>Predicted Ovulation:</strong> {prediction.ovulationDate}</p>
-              <p className="text-gray-600"><strong>Predicted Fertile Window:</strong> {prediction.fertileWindowStart} to {prediction.ovulationDate}</p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-3 bg-red-50 rounded">
+                <p className="text-sm text-gray-500 uppercase font-bold">Next Period</p>
+                <p className="text-lg font-semibold">{prediction.nextPeriodDate}</p>
+              </div>
+              <div className="p-3 bg-blue-50 rounded">
+                <p className="text-sm text-gray-500 uppercase font-bold">Ovulation</p>
+                <p className="text-lg font-semibold">{prediction.ovulationDate}</p>
+              </div>
+              <div className="p-3 bg-green-50 rounded">
+                <p className="text-sm text-gray-500 uppercase font-bold">Fertile Window</p>
+                <p className="text-sm font-medium">{prediction.fertileWindowStart} - {prediction.ovulationDate}</p>
+              </div>
             </div>
           ) : predictionError ? (
-            <p className="text-red-500">Could not get prediction: {predictionError}</p>
+            <div className="p-4 bg-red-50 text-red-700 rounded border border-red-200">
+              <p className="font-bold italic">Connection Issue:</p>
+              <p className="text-sm">{predictionError}</p>
+              <button 
+                onClick={() => fetchPrediction(currentUser?.uid, loggedData)}
+                className="mt-2 text-xs underline font-bold"
+              >
+                Try Reconnecting to Server
+              </button>
+            </div>
           ) : (
-            <p className="text-gray-600">Calculating your predictions...</p>
+            <div className="flex items-center space-x-3">
+              <div className="animate-spin h-5 w-5 border-2 border-brand-red border-t-transparent rounded-full"></div>
+              <p className="text-gray-600 italic">Syncing with Veda Bloom backend...</p>
+            </div>
           )}
         </div>
         
         <h1 className="text-4xl font-bold text-brand-red mb-6">Track Your Cycle</h1>
         <div className="bg-white p-6 rounded-lg shadow-lg">
           <p className="text-lg text-gray-600 mb-4">Click on a date to log your symptoms and mood.</p>
-          <Calendar onChange={setDate} value={date} onClickDay={openModal} className="border-0" />
+          <Calendar onChange={setDate} value={date} onClickDay={openModal} className="border-0 w-full" />
         </div>
 
         {Object.keys(loggedData).length > 0 && (
           <div className="mt-8 bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold text-brand-red mb-4">Symptom Log Summary</h2>
-            <ul className="space-y-2">
+            <ul className="space-y-3">
               {Object.entries(loggedData).map(([date, data]) => (
-                <li key={date} className="text-gray-700">
-                  <strong className="text-gray-900">{date}:</strong> 
-                  {data.mood && ` Mood - ${data.mood}. `}
-                  {data.symptoms && data.symptoms.length > 0 && `Symptoms - ${data.symptoms.join(', ')}.`}
+                <li key={date} className="p-3 border-b border-gray-100 last:border-0">
+                  <strong className="text-brand-red block mb-1">{date}</strong> 
+                  <div className="text-sm text-gray-700">
+                    {data.mood && <span className="mr-3">✨ {data.mood}</span>}
+                    {data.symptoms && data.symptoms.length > 0 && (
+                      <span className="text-gray-500 italic">({data.symptoms.join(', ')})</span>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
