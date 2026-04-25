@@ -127,10 +127,6 @@ This logic is implemented in the **Spring Boot prediction API**.
 <img width="1440" height="900" alt="homepage" src="https://github.com/user-attachments/assets/478ac2d1-0020-412b-a4c2-3f358b216c68" />
 
 
-## Google Login
-<img width="1440" height="900" alt="Screenshot 2026-03-07 at 21 31 27" src="https://github.com/user-attachments/assets/f7b9e146-a3d8-4049-8a9e-74348c6d7b1b" />
-
-
 ## Cycle Calendar & Prediction Results
 <img width="1440" height="900" alt="Screenshot 2026-03-07 at 21 39 49" src="https://github.com/user-attachments/assets/d1d8b9ec-c7f0-4fb8-a816-a0fbaf86ad1b" />
 
