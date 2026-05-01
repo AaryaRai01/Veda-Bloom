@@ -1,4 +1,4 @@
-# 🌸 Veda Bloom
+# Veda Bloom
 
 Veda Bloom is a **full-stack menstrual health tracking web application** that helps users monitor their cycle, log daily symptoms, and receive predictions for upcoming periods, ovulation, and fertile windows.
 
